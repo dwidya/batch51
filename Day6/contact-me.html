@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <title>Contact Me</title>
+        <link rel="stylesheet" href="./src/assets/css/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="./src/assets/css/myproject-responsive.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <nav>
+            <div class="nav-left">
+                <ul>
+                    <img src="./src/assets/img/logo.png" alt="logo" />
+                    <li>
+                        <a href="./index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="./">My Project</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="nav-right">
+                <a href="./contact-me.html">Contact Me</a>
+            </div>
+            <div class="barsmenu" id="barsmenu" >
+              <button class="humberger-button" onclick="openhumberger()">
+                <i class="fa-solid fa-bars fa-xl"></i>
+              </button>
+          </div>
+        </nav>
+        <div class="humberger-nav-container" id="humberger-nav-container">
+          <a href="./index.html">Home</a>
+          <a href="./myproject.html" >My Project</a>
+          <a href="./contact-me.html" class="humberger-active" >Contact Me</a>
+      </div>
+
+        <form>
+            <div>
+              <label for="name">Name</label>
+              <input type="text" id="Name"/>
+            </div>
+            
+            <div>
+              <label for="email">Email</label>
+              <input type="text" id="Email"/>
+            </div>
+      
+            <div>
+              <label for="phone">Phone Number</label>
+              <input type="text" id="Phone"/>
+            </div>
+      
+            <div>
+              <label for="subject">Subject</label>
+              <select id="Subject">
+                <option value="" disabled selected> </option>
+                <option>Frontend Developer</option>
+                <option>Backend Developer</option>
+                <option>Fullstack Developer</option>
+              </select>
+            </div>
+      
+            <div>
+              <label for="message">Message</label>
+              <textarea id="Message"></textarea>
+
+              <button type="button" onclick="getdata()">submit</button>
+            </div>
+          </form>
+    </body>
+
+            <script src="./src/assets/js/contact.js"></script>
+            <script src="./src/assets/js/burger-button.js"></script>
+</html>
