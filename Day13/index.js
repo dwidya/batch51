@@ -3,7 +3,7 @@ const path = require('path')
 const app = express()
 const db = require("./src/config/config.json")
 const dammy = require("./src/assets/database/blog.json")
-const {Sequelize, Querytypes} = require("sequelize")
+const {Sequelize, QueryTypes} = require("sequelize")
 
 const sequelize = new Sequelize(db.development)
 
@@ -37,7 +37,7 @@ async function home(req, res){
     try {
         const query = `SELECT id, name, start_date, end_date, description, technologies, image FROM tb_projects`
 
-        let obj = await sequelize.query (query)
+        let obj = await sequelize.query (query,{type:QueryTypes.SELECT})
         let object = []
         for (let i = 0; i < obj.length; i++) {
             let data = {
