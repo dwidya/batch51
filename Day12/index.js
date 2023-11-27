@@ -87,3 +87,34 @@ function deleteproject(req, res){
 dummy.splice(id, 1)
 res.redirect('/')
 }
+
+
+function durationCount(start,end){
+    let dateStart = new Date(start)
+    let dateEnd = new Date(end)
+    let daysBetween = 1000*60*60*24
+  
+    let timeDifference = dateEnd - dateStart
+    let daysTotal = timeDifference / daysBetween
+        daysRemaining = daysTotal % 30
+    let MonthTotal = Math.floor(daysTotal/30)
+  
+    days = daysRemaining
+    months = MonthTotal
+  
+    let duration = ""
+    if(months === 0){
+        duration +=`
+        ${days} Hari
+        `
+        } else if (months === 1){
+        duration += `
+        ${months} Bulan ${days} Hari
+        `
+        } else{
+            duration += `
+            ${months} Bulan ${days} Hari
+            `
+        }
+    return duration
+  }
