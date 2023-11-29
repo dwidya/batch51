@@ -1,0 +1,133 @@
+<html>
+    <head>
+        <title>welcome to my hut</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    </head>
+    <body>
+
+       <nav class="navbar navbar-expand-lg bg-nav-color py-3 sticky-top" style="position: relative;">
+            <div class="container">
+              <a class="navbar-brand me-4" href="index.html">
+                <img src="./img/logo.png" alt="logo" />
+              </a>
+        <button class="navbar-toggler" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 h5">
+                  <li class="nav-item me-4">
+                    <a class="nav-link text-dark" href="/" >Home</a>
+                  </li>
+                  {{#if isLogin}}
+                  <li class="nav-item me-4">
+                    <a class="nav-link text-dark" href="/addproject">Add Project</a>
+                  </li>
+                  {{/if}}
+                  <li class="nav-item">
+                    <a class="nav-link text-dark" href="/testimonials">Testimonials</a>
+             </div>
+   
+              </li>
+                </ul>
+                    <div class="d-flex justify-content-end">
+              <ul class="navbar-nav me-auto mb-2 ms-5 mb-lg-0">
+                {{#if isLogin}}
+                  <li class="nav-item">
+                    <a class="nav-link btn-dark active fw-semibold" href="#">Hallo, {{user}}</a>
+                  </li>
+                  <li class="nav-item ms-3">
+                    <a class="nav-link" href="/logout">Logout</a>
+                  </li>
+                {{else}}
+                  <li class="nav-item">
+                    <a class="nav-link  active fw-semibold" href="/register">Register</a>
+                  </li>
+                  <li class="nav-item ms-3">
+                    <a class="nav-link" href="/login">Login</a>
+                  </li>
+                {{/if}}
+              </ul>
+              <a class="btn btn-dark btn-submit ms-5" href="/contactme">Contact-Me</a>
+          </div>
+        </div>
+      </div>
+
+        </nav>
+
+    <div class="bg-body-secondary overflow-hidden">
+        <div class="container my-5">
+          <div class="card shadow">
+            <div class="container m-5">
+              <div class="row">
+                <div class="col-md-6">
+                  <h1>Hi Welcome to my hut</h1>
+                  <p class="fs-6" style="text-align: justify">
+                    Halo , nama saya Dwidya Dharmawanto, umur saya 21, domisi saya dari tanggerang selatan, hobi saya bermain motor trail atau pun motor road race , dan juga punya hobi bermain komputer di karenakan saya dari sd kelas 1 saya sudah main warnet,menggenai soal coding saya pun sudah beberapa yg saya paham namun belum sempurna, kalo soal frontend ada ccs,bootstrap,js, lalu kalau backend saya udh belajar database menggunakan postgresql dan js , api , harapan saya menggikuti bootcamp ini bisa mempelajari lebih dalam baikpun itu frontend atau backend .</p>
+                  <div class="d-flex align-items-center mt-5">
+                    <button class="btn btn-dark hover-white me-3 rounded-pill w-25"> Contact</button>
+                    <a href="#" class="me-3 text-decoration-none text-dark" >Download CV</a>
+                    <img src="./img/icon unduh.png" style="width: 25px; height: 25px; margin-left: 5px; vertical-align: middle;">
+                    <i class="fas fa-arrow-alt-to-bottom fa-xl"></i>
+                  </div>
+                  <div class="d-flex align-items-center mt-5">
+                    <i class="me-5 fab fa-linkedin fa-3x"></i>
+                    <i class="me-5 fab fa-instagram fa-3x"></i>
+                    <i class="me-5 fab fa-facebook fa-3x"></i>
+                    <i class="fab fa-twitter fa-3x"></i>
+                  </div>
+                </div>
+                <div class="col-md-6 ps-5">
+                  <div class="card shadow w-75 rounded justify-content-end" style="width: 18rem">
+                    <img src="./img/Dwidya.jpg" class="card-img-top" alt="my picture" />
+                    <div class="card-body">
+                      <h5 class="card-title text-center fw-bold">Dwidya Dharmawanto</h5>
+                      <p class="card-text text-center">Supermoto User</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+         <div class="bg-white overflow-hidden">
+        <div class="container">
+          <h1 class="text-center my-5">My Project</h1>
+          <div class="row gap-4 d-flex">
+            {{#each data}}
+            <div class="card shadow" style="width: 26.47rem">
+              <div style="height: 300px" class="overflow-hidden">
+               <a href="/projectdetail/{{this.id}}"><img src="{{this.Image}}" alt="picture" class="card-img-top"></a>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title fw-bold">{{this.name}}</h5>
+                <p class="card-text">Author : {{this.author}}</p>
+                <p class="card-text">Durasi :{{this.duration}}</p>
+                <p class="card-text">
+                    {{this.description}}</p>
+                 {{#each technologies}}
+                    <img src="/img/{{this}}.svg">
+                  {{/each}} 
+  
+                <div class="d-flex gap-4 my-4">
+                  {{#if this.ifclause}}
+                  <a class="btn btn-dark hover-white w-50 rounded" href="/updateblog/{{this.id}}" role="button" >Edit</a>
+                  <a class="btn btn-dark hover-white w-50" href="/deleteproject/{{this.id}}"  role="button">Delete</a>
+                  {{/if}}
+                </div>
+              </div>
+            
+            </div>
+           {{/each}}  
+
+          </div>
+        </div>
+      </div>
+</form>
+    </body>
+    <script src="./js/burger-button.js"></script>
+    <script src="./js/myproject.js"></script>
+  </html>

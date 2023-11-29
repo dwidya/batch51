@@ -9,6 +9,8 @@ const bcrypt = require('bcrypt')
 const session = require('express-session')
 const flash = require('express-flash')
 
+const upload = require('./src/middlewares/uploadFile')
+
 
 const sequelize = new Sequelize(db.development)
 
@@ -29,6 +31,8 @@ app.use(session({
 
 
 app.use(flash())
+app.use(express.static('src/uploads'))
+
 app.set('view engine', 'hbs')
 app.set('views', path.join(__dirname, 'src/views'))
 
@@ -47,7 +51,7 @@ app.get('/register', register)
 app.post('/register', addUser)
 
 app.get('/addproject', formproject)
-app.post('/addproject', addproject)
+app.post('/addproject', upload.single('uploadimage'), addproject)
 
 app.get('/testimonials', testimonials)
 app.get('/contactme', contactme)
@@ -55,7 +59,7 @@ app.get('/contactme', contactme)
 app.get('/projectdetail/:id', projectdetail)
 app.get('/deleteproject/:id', deleteproject)
 app.get('/updateblog/:id', formUpdate)
-app.post('/updateblog/:id',UpdateProject)
+app.post('/updateblog/:id',upload.single('uploadimage'), UpdateProject)
 
 app.listen(port, () => {
     console.log("App Listening on port 5000")
@@ -64,12 +68,19 @@ app.listen(port, () => {
 
 async function home(req, res){
     try {
-        const query = `SELECT id, name, start_date, end_date, description, technologies, image FROM tb_projects`
+        const query = `SELECT tb_projects.id, tb_projects.name, start_date, end_date, description, technologies, image, tb_user.name AS author FROM tb_projects LEFT JOIN tb_user ON tb_projects.author = tb_user.id` 
         let obj = await sequelize.query(query, {type: QueryTypes.SELECT})
         let object = []
+        
+        let buttonIf = Boolean
 
-        for (let i = 0; i<obj.length;i++){
-            let data = {
+        for (let i = 0; i < obj.length; i++){
+            if(req.session.user == obj[i].author){
+                buttonIf = true
+            }else{
+                buttonIf = false
+            }
+              let data = {
                 id: obj[i].id,
                 name: obj[i].name,
                 duration: durationCount(obj[i].start_date,obj[i].end_date),
@@ -77,7 +88,8 @@ async function home(req, res){
                 technologies:obj[i].technologies,
                 Image:obj[i].image,
                 author:obj[i].author,
-                isLogin: req.session.isLogin
+                isLogin: req.session.isLogin,
+                ifclause: buttonIf
             }
             console.log(data);
             object.push(data)
@@ -106,7 +118,9 @@ function formproject(req, res){
     try {
         const { ProjectName, StartDate, DateEnd, description, checkbox } = req.body
         const idUser = req.session.idUser
-        const query = `INSERT INTO tb_projects(name, start_date, end_date, description, technologies, image) values('${ProjectName}', '${StartDate}', '${DateEnd}', '${description}', '{${checkbox}}','${idUser}''dwi')`
+        const image = req.file.filename
+
+        const query = `INSERT INTO tb_projects(name, start_date, end_date, description, technologies, image, author) values('${ProjectName}', '${StartDate}', '${DateEnd}', '${description}', '{${checkbox}}','${image}','${idUser}')`
 
         await sequelize.query(query, {type: QueryTypes.INSERT})
         res.redirect('/')
@@ -191,8 +205,9 @@ async function UpdateProject(req, res){
     try {
         const { id } = req.params
         const { ProjectName, StartDate, DateEnd, description, checkbox} = req.body
-  
-        const query = `UPDATE tb_projects SET name='${ProjectName}', start_date='${StartDate}', end_date='${DateEnd}', description='${description}', technologies='{${checkbox}}', image='image' WHERE id='${id}'`
+        const image = req.file.filename
+      
+        const query = `UPDATE tb_projects SET name='${ProjectName}', start_date='${StartDate}', end_date='${DateEnd}', description='${description}', technologies='{${checkbox}}', image='${image}' WHERE id='${id}'`
         
         await sequelize.query(query, {type: QueryTypes.UPDATE})
         res.redirect('/')
