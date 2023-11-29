@@ -36,7 +36,6 @@ app.listen(port, () => {
 async function home(req, res){
     try {
         const query = `SELECT id, name, start_date, end_date, description, technologies, image FROM tb_projects`
-
         let obj = await sequelize.query (query,{type:QueryTypes.SELECT})
         let object = []
         for (let i = 0; i < obj.length; i++) {

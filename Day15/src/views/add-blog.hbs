@@ -1,0 +1,121 @@
+<html>
+    <head>
+        <title>welcome to my hut</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./js/scrip.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    </head>
+    <body>
+    
+        <nav class="navbar navbar-expand-lg bg-nav-color py-3 sticky-top" style="position: relative;">
+            <div class="container">
+              <a class="navbar-brand me-4" href="/">
+                <img src="./img/logo.png" alt="logo" />
+              </a>
+        <button class="navbar-toggler" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 h5">
+                  <li class="nav-item me-4">
+                    <a class="nav-link text-dark" href="/" >Home</a>
+                  </li>
+                  {{#if isLogin}}
+                  <li class="nav-item me-4">
+                    <a class="nav-link text-dark" href="/addproject">Add Project</a>
+                    {{/if}}
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-dark" href="/testimonials">Testimonials</a>
+                  </li>
+                </ul>
+
+                
+
+
+                <a class="btn btn-dark hover-white" type="submit" href="/contactme" >Contact-Me</a>
+              </div>
+            </div>
+    </nav>
+    
+
+    <div class="bg-body-secondary overflow-hidden">
+      <div class="container my-5">
+        <div class="d-flex justify-content-center">
+          <form class="w-75" method="post" action="/addproject" >
+           
+            <div class="mb-3">
+              <label for="project-name" class="form-label fw-bold h5">Project Name</label>
+              <input type="text" class="form-control" name="ProjectName" id="project-name"/>
+            </div>
+            
+        <div class="d-flex gap-4">
+              <div class="mb-3 w-50">
+                <label for="start-date" class="form-label fw-bold h5" >Start Date</label>
+                <input type="date" class="form-control" name="StartDate" id="start-date"/>
+             </div>
+              
+        <div class="mb-3 w-50">
+                <label for="end-date" class="form-label fw-bold h5" >End Date</label>
+                <input type="date" class="form-control" name="DateEnd" id="end-date"/>
+            </div>
+            
+        </div>
+            
+        <div class="mb-3">
+              <label for="description" class="form-label fw-bold h5">Description</label >
+              <textarea class="form-control" id="description" name="description" rows="5"cols="50" style="resize: none"></textarea>
+        </div>
+           
+        <div class="mb-3">
+              <label class="form-label fw-bold h5">Technologies</label>
+              <div name="Technologies">
+                <div class="d-flex mb-3" style="gap: 114px">
+                 
+                  <div>
+                    <input class="form-check-input rounded me-2" type="checkbox" value="Node Js" name="checkbox" id="flexCheckDefault" style="width: 25px; height: 25px"/>
+                    <label class="form-check-label pt-1 h5 fw-bold" for="flexCheckDefault"> Node Js</label>
+                  </div>
+                  
+                  <div>
+                    <input class="form-check-input rounded me-2" type="checkbox" value="React Js" name="checkbox" id="flexCheckDefault" style="width: 25px; height: 25px"/>
+                    <label class="form-check-label pt-1 h5 fw-bold" for="flexCheckDefault">React Js</label>
+                  </div>
+                
+                </div>
+                
+                
+                <div class="d-flex" style="gap: 120px">
+                  
+                  <div>
+                    <input class="form-check-input rounded me-2" type="checkbox" value="Next Js" name="checkbox" id="flexCheckDefault" style="width: 25px; height: 25px"/>
+                    <label class="form-check-label pt-1 h5 fw-bold" for="flexCheckDefault">Next Js</label>
+                  </div>
+                  
+                  <div>
+                    <input class="form-check-input rounded me-2" type="checkbox" value="Type Script" name="checkbox" id="flexCheckDefault" style="width: 25px; height: 25px"/>
+                    <label class="form-check-label pt-1 h5 fw-bold" for="flexCheckDefault">Type script</label>
+                  </div>
+                
+                </div>
+              </div>
+            </div>
+           
+            <div class="mb-3">
+              <label for="project-name" class="form-label fw-bold h5">Upload Image</label>
+              <input class="form-control form-control-lg" name="uploadimage" id="formFileLg"type="file"/>
+            </div>
+
+            <div class="d-flex justify-content-end">
+              <button type="submit" class="btn btn-primary btn-dark hover-white btn-lg">Submit</button>
+            </div>
+         
+          </form>
+        </div>
+      </div>
+    </div>
+
+    </body>
+    <script src="/js/myproject.js"></script>
+</html>
